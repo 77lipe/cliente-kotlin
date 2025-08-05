@@ -1,8 +1,7 @@
-package br.senai.sp.jandira.clientesapp.screens
+package br.senai.sp.jandira.clientesapp.screens.cliente_componentes
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -19,31 +18,22 @@ import br.senai.sp.jandira.clientesapp.ui.theme.ClientesAppTheme
 fun ListaDeClientes(modifier: Modifier = Modifier){
     Scaffold (
         topBar = {
-            Text(text = "Barra de Título")
+            BarraDeTitulo()
         },
         bottomBar = {
-            Text(text = "Barra Inferior")
+            BarraInferior()
         },
         floatingActionButton = {
-            Button(
-                onClick = {}
-            ) {
-                Text(text = "Click me")
-            }
+            BotaoFlutuante()
         },
         content = { padding ->
-            Column (
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(padding)
-                    .background(MaterialTheme.colorScheme.background)
-            ){  }
+            Conteudo(padding)
         }
     )
 }
 
 
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO)
 @Composable
 private fun ListaDeClientesPreview(){
     ClientesAppTheme {

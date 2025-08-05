@@ -15,20 +15,44 @@ import androidx.compose.ui.platform.LocalContext
 private val DarkColorScheme = darkColorScheme(
     primary = primaryDark,
     onPrimary = onPrimaryDark,
+    primaryContainer = primaryContainerDark,
+    onPrimaryContainer = onPrimaryContainerDark,
     secondary = secondaryDark,
     onSecondary = onSecondaryDark,
+    secondaryContainer = secondaryContainerDark,
+    onSecondaryContainer = onSecondaryContainerDark,
     tertiary = tertiaryDark,
-    onTertiary = onTertiaryDark
+    onTertiary = onTertiaryDark,
+    tertiaryContainer = tertiaryContainerDark,
+    onTertiaryContainer = onTertiaryContainerDark,
+    error = errorDark,
+    onError = onErrorDark,
+    errorContainer = errorContainerDark,
+    onErrorContainer = onErrorContainerDark,
+    background = backgroundDark,
+    onBackground = onBackgroundDark,
 
     )
 
 private val LightColorScheme = lightColorScheme(
     primary = primaryLight,
     onPrimary = onPrimaryLight,
+    primaryContainer = primaryContainerLight,
+    onPrimaryContainer = onPrimaryContainerLight,
     secondary = secondaryLight,
     onSecondary = onSecondaryLight,
+    secondaryContainer = secondaryContainerLight,
+    onSecondaryContainer = onSecondaryContainerLight,
     tertiary = tertiaryLight,
-    onTertiary = onTertiaryLight
+    onTertiary = onTertiaryLight,
+    tertiaryContainer = tertiaryContainerLight,
+    onTertiaryContainer = onTertiaryContainerLight,
+    error = errorLight,
+    onError = onErrorLight,
+    errorContainer = errorContainerLight,
+    onErrorContainer = onErrorContainerLight,
+    background = backgroundLight,
+    onBackground = onBackgroundLight,
 
 
     /* Other default colors to override
