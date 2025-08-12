@@ -1,6 +1,7 @@
 package br.senai.sp.jandira.clientesapp.screens.cliente_componentes
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
@@ -50,11 +51,12 @@ fun BarraInferior(modifier: Modifier = Modifier){
             selected = false,
             icon = {
                 Icon(
-                    imageVector = Icons.Default.Person,
+                    imageVector = Icons.Default.Add,
                     contentDescription = "PerfilIcon")
             },
             label = {
-                Text(text = "Perfil")
+                Text(text = "" +
+                        "Novo Cliente")
             }
         )
     }

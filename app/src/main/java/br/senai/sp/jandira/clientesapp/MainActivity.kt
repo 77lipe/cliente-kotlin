@@ -13,6 +13,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import br.senai.sp.jandira.clientesapp.model.Cliente
+import br.senai.sp.jandira.clientesapp.screens.cliente_componentes.ListaDeClientes
 import br.senai.sp.jandira.clientesapp.service.Conexao
 import br.senai.sp.jandira.clientesapp.ui.theme.ClientesAppTheme
 import kotlinx.coroutines.Dispatchers
@@ -28,16 +29,7 @@ import retrofit2.await
         setContent {
             ClientesAppTheme {
 
-                    val cliente = Cliente(
-                        id = null,
-                        nome = "cadastro do Felipe",
-                        email = "emailTeste@email.com"
-                    )
-
-                val conexao = Conexao().getClientesService()
-                LaunchedEffect(Dispatchers.IO) {
-                    conexao.cadastrarCliente(cliente).await()
-                }
+                    ListaDeClientes()
 
 
 //                val requisicao = enviar.cadastrarCliente(cliente)

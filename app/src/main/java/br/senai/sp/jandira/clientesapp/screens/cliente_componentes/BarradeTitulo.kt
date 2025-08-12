@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -47,7 +48,8 @@ fun BarraDeTitulo(modifier: Modifier = Modifier){
                 Card(
                     modifier = Modifier
                         .size(60.dp)
-                        .padding(4.dp)
+                        .padding(4.dp),
+                    shape = CircleShape
                 ) {
                     Image(
                         painter = painterResource(R.drawable.brita),
