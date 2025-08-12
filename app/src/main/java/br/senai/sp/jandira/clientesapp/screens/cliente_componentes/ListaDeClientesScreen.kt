@@ -1,14 +1,7 @@
 package br.senai.sp.jandira.clientesapp.screens.cliente_componentes
 
 import android.content.res.Configuration
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,17 +20,19 @@ fun ListaDeClientes(modifier: Modifier = Modifier){
             BarraDeTitulo()
         },
         bottomBar = {
-            BarraInferior()
+            BarraInferior(controleNavegacao)
         },
         floatingActionButton = {
-            BotaoFlutuante()
+            BotaoFlutuante(controleNavegacao)
         },
         content = { padding ->
             NavHost(
                 navController = controleNavegacao,
-                startDestination = "lista"
+                startDestination = "conteudo"
             ){
-                composable(route = "lista"){ Conteudo(padding) }
+                composable(route = "conteudo"){ Conteudo(padding)}
+                composable(route = "cadastro"){ ClienteForm(padding, controleNavegacao) }
+
             }
         }
     )
