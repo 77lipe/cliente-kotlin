@@ -9,15 +9,18 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -30,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.senai.sp.jandira.clientesapp.model.Cliente
+import br.senai.sp.jandira.clientesapp.service.ClienteService
 import br.senai.sp.jandira.clientesapp.service.Conexao
 import br.senai.sp.jandira.clientesapp.ui.theme.ClientesAppTheme
 import kotlinx.coroutines.Dispatchers
@@ -40,6 +44,7 @@ fun Conteudo (paddingValues: PaddingValues){
 
     val clienteApi = Conexao().getClientesService()
     var clientes by remember { mutableStateOf(listOf<Cliente>()) }
+
 
     LaunchedEffect(Dispatchers.IO) {
         clientes = clienteApi.listarClientes().await()
@@ -63,39 +68,97 @@ fun Conteudo (paddingValues: PaddingValues){
         }
         LazyColumn {
             items(clientes){ cliente ->
-                Card(
-                    modifier = Modifier
-                        .padding(
-                            start = 8.dp,
-                            end = 8.dp,
-                            bottom = 9.dp
-                        )
-                        .fillMaxWidth()
-                        .height(80.dp)
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .padding(12.dp)
-                            .fillMaxSize(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Column {
-                            Text(
-                                text = cliente.nome
-                            )
-                            Text(
-                                text = cliente.email
-                            )
-                        }
-                        Icon(
-                            imageVector = Icons.Default.Delete,
-                            contentDescription = "DeleteIcon"
-                        )
-                    }
-                }
+                CardCliente(cliente, clienteApi)
+
+            }
             }
         }
+
+
+    }
+
+@Composable
+private fun CardCliente(
+    cliente: Cliente,
+    clienteApi: ClienteService,
+) {
+    var mostrarMensagemApagar by remember { mutableStateOf(false) }
+
+    Card(
+        modifier = Modifier
+            .padding(
+                start = 8.dp,
+                end = 8.dp,
+                bottom = 9.dp
+            )
+            .fillMaxWidth()
+            .height(80.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(12.dp)
+                .fillMaxSize(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column {
+                Text(
+                    text = cliente.nome
+                )
+                Text(
+                    text = cliente.email
+                )
+            }
+            IconButton(
+                onClick = {
+                    mostrarMensagemApagar = true
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Delete,
+                    contentDescription = "DeleteIcon"
+                )
+            }
+
+        }
+    }
+
+    if (mostrarMensagemApagar) {
+        AlertDialog(
+            onDismissRequest = {
+                mostrarMensagemApagar = false
+            },
+            title = {
+                Text(text = "Exclusão do Cliente")
+            },
+            text = {
+                Text(text = "Cliente deletado com sucesso!! \n\n${cliente.nome}")
+            },
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.Warning,
+                    contentDescription = "Cuidado"
+                )
+            },
+            confirmButton = {
+                Button(
+                    onClick = {
+                        mostrarMensagemApagar = false
+                    }
+                ) {
+                    Text(text = "Confirmar")
+                }
+
+            },
+            dismissButton = {
+                Button(
+                    onClick = {
+                        mostrarMensagemApagar = false
+                    }
+                ) {
+                    Text(text = "Cancelar")
+                }            }
+        )
     }
 }
 
